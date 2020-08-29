@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Helper Module for the Semester-Stats"
 authors = ["Rushyanth S <42034084+Rushyanth111@users.noreply.github.com>"]
 packages = [
-    {include = "Common-Report-Module"},
+    {include = "Common_Report_Module"},
 ]
 
 [tool.poetry.dependencies]
