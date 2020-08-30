@@ -1,5 +1,4 @@
-from re import sub
-from typing import Optional, Tuple, List
+from typing import List
 
 from pydantic import BaseModel, validator
 from .regex import department_regex, usn_regex, subcode_regex
@@ -36,7 +35,7 @@ class DepartmentReport(BaseModel):
     def __hash__(self) -> int:
         return hash(self.Code)
 
-    _code_check = validator("Code", pre=True)(dept_validate)
+    _code_check = validator("Code", pre=True, allow_reuse=True)(dept_validate)
 
 
 class StudentReport(BaseModel):
@@ -49,7 +48,7 @@ class StudentReport(BaseModel):
     def __eq__(self, o: "StudentReport") -> bool:
         return self.Usn == o.Usn
 
-    _usn_check = validator("Usn")(usn_validate)
+    _usn_check = validator("Usn", allow_reuse=True)(usn_validate)
 
 
 class SubjectReport(BaseModel):
@@ -62,7 +61,7 @@ class SubjectReport(BaseModel):
     def __eq__(self, o: "SubjectReport") -> bool:
         return self.Code == o.Code
 
-    _subcode_check = validator("Code")(subcode_validate)
+    _subcode_check = validator("Code", allow_reuse=True)(subcode_validate)
 
 
 class ScoreReport(BaseModel):
@@ -71,8 +70,10 @@ class ScoreReport(BaseModel):
     Internals: int
     Externals: int
 
-    _usn_check = validator("Usn", pre=True)(usn_validate)
-    _subcode_check = validator("SubjectCode", pre=True)(subcode_validate)
+    _usn_check = validator("Usn", pre=True, allow_reuse=True)(usn_validate)
+    _subcode_check = validator("SubjectCode", pre=True, allow_reuse=True)(
+        subcode_validate
+    )
 
     def __hash__(self) -> int:
         return hash((self.Usn, self.SubjectCode, self.Internals, self.Externals))
@@ -108,7 +109,7 @@ class SubjectScoreList(BaseModel):
             and self.External == o.External
         )
 
-    _subcode_check = validator("Code", pre=True)(subcode_validate)
+    _subcode_check = validator("Code", pre=True, allow_reuse=True)(subcode_validate)
 
 
 class MergedReport(BaseModel):
@@ -116,4 +117,4 @@ class MergedReport(BaseModel):
     Name: str
     Scores: List[SubjectScoreList]
 
-    _usn_check = validator("Usn", pre=True)(usn_validate)
+    _usn_check = validator("Usn", pre=True, allow_reuse=True)(usn_validate)
