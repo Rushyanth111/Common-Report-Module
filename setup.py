@@ -9,5 +9,5 @@ setup(
     url="https://github.com/Rushyanth111/Common-Report-Module",
     packages=find_packages(exclude=[".venv", "tests"]),
     install_requires=["pydantic", "requests"],
-    version="0.0.1",
+    version="0.1.0",
 )
