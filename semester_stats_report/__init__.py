@@ -6,7 +6,7 @@ from .reports import (
     ScoreReport,
 )
 
-from .httpclient import RestClient
+from .client import SemesterClient
 
 __all__ = [
     "DepartmentReport",
@@ -14,5 +14,5 @@ __all__ = [
     "SubjectReport",
     "MergedReport",
     "ScoreReport",
-    "RestClient",
+    "SemesterClient",
 ]
