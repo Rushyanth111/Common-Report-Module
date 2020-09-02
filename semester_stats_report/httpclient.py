@@ -1,16 +1,39 @@
-import requests
 from typing import Any, Dict
 
+import requests
+from pydantic import ValidationError
 
-class RestClient:
-    def __init__(self, url=None, port=None) -> None:
-        self.url = "https://localhost:8000" if url is not None else url
+# All of the responses recieved are JSON. Work With them.
 
-    def _get(self, params: Dict[str, str] = None) -> requests.Response:
-        return requests.get(self.url, params=params)
 
-    def _post(self, body: Any):
-        return requests.post(self.url, data=body)
+class BaseClient:
+    def __init__(self, url: str) -> None:
+        # Remove the Traling Slash from the Link if there is.
+        self.url = url.strip("/")
 
-    def _put(self, body: Any):
-        return requests.put(self.url, data=body)
+    def _get(self, ep: str, params: Dict[str, str] = None):
+        url = self.url + ep
+        res = requests.get(url, params=params)
+        data = res.json()
+        if res.status_code == 422:
+            raise ValidationError(**data)
+        else:
+            return data
+
+    def _post(self, ep: str, body: Any):
+        url = self.url + ep
+        res = requests.get(url, body=body)
+        data = res.json()
+        if res.status_code == 422:
+            raise ValidationError(**data)
+        else:
+            return data
+
+    def _put(self, ep: str, body: Any):
+        url = self.url + ep
+        res = requests.get(url, body=body)
+        data = res.json()
+        if res.status_code == 422:
+            raise ValidationError(**data)
+        else:
+            return data
