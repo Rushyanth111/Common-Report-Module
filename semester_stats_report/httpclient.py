@@ -1,9 +1,21 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import requests
-from pydantic import ValidationError
+from pydantic import ValidationError, BaseModel
 
 # All of the responses recieved are JSON. Work With them.
+
+
+class HTTPValidationError(BaseModel):
+    detail: List[ValidationError]
+
+
+class NotFoundError(Exception):
+    pass
+
+
+class UnProccessableEntity(Exception):
+    pass
 
 
 class BaseClient:
@@ -15,25 +27,34 @@ class BaseClient:
         url = self.url + ep
         res = requests.get(url, params=params)
         data = res.json()
+
+        if res.status_code == 404:
+            raise NotFoundError(data["detail"])
         if res.status_code == 422:
-            raise ValidationError(**data)
-        else:
-            return data
+            raise UnProccessableEntity
+
+        return data
 
     def _post(self, ep: str, body: Any):
         url = self.url + ep
-        res = requests.get(url, body=body)
+        res = requests.post(url, json=body)
         data = res.json()
+
+        if res.status_code == 404:
+            raise NotFoundError(data["detail"])
         if res.status_code == 422:
-            raise ValidationError(**data)
-        else:
-            return data
+            raise UnProccessableEntity
+
+        return data
 
     def _put(self, ep: str, body: Any):
         url = self.url + ep
-        res = requests.get(url, body=body)
+        res = requests.put(url, json=body)
         data = res.json()
+
+        if res.status_code == 404:
+            raise NotFoundError(data["detail"])
         if res.status_code == 422:
-            raise ValidationError(**data)
-        else:
-            return data
+            raise UnProccessableEntity
+
+        return data
