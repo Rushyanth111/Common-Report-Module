@@ -1,6 +1,7 @@
 from typing import List
 
 from pydantic import BaseModel, validator
+from requests import status_codes
 from .regex import department_regex, usn_regex, subcode_regex
 
 
@@ -37,6 +38,10 @@ class DepartmentReport(BaseModel):
 
     _code_check = validator("Code", pre=True, allow_reuse=True)(dept_validate)
 
+    @staticmethod
+    def create(code: str, name: str):
+        return DepartmentReport(Code=code, Name=name)
+
 
 class StudentReport(BaseModel):
     Usn: str
@@ -50,6 +55,10 @@ class StudentReport(BaseModel):
 
     _usn_check = validator("Usn", allow_reuse=True)(usn_validate)
 
+    @staticmethod
+    def create(usn: str, name=str):
+        return StudentReport(Usn=usn, Name=name)
+
 
 class SubjectReport(BaseModel):
     Code: str
@@ -62,6 +71,10 @@ class SubjectReport(BaseModel):
         return self.Code == o.Code
 
     _subcode_check = validator("Code", allow_reuse=True)(subcode_validate)
+
+    @staticmethod
+    def create(code: str, name: str):
+        return SubjectReport(Code=code, Name=name)
 
 
 class ScoreReport(BaseModel):
@@ -91,6 +104,12 @@ class ScoreReport(BaseModel):
 
     def __ge__(self, o: "ScoreReport") -> bool:
         return (self.Internals + self.Externals) >= (o.Internals + o.Externals)
+
+    @staticmethod
+    def create(usn: str, subcode: str, internals: int, externals: int):
+        return ScoreReport(
+            Usn=usn, SubjectCode=subcode, Internals=internals, Externals=externals
+        )
 
 
 class SubjectScoreList(BaseModel):
