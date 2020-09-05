@@ -1,3 +1,4 @@
+from semester_stats_report.reports import SubjectReport
 from .httpclient import BaseClient
 
 
@@ -9,8 +10,8 @@ class SubjectClient(BaseClient):
     def get(self):
         return self._get("/{}".format(self.subcode))
 
-    def update(self):
-        pass
+    def update(self, report: SubjectReport):
+        return self._put("/{}".format(self.subcode), body=report.dict())
 
-    def add(self):
-        pass
+    def add(self, report: SubjectReport):
+        return self._post("/", body=report.dict())
