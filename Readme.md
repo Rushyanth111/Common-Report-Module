@@ -16,25 +16,32 @@ pip install https://github.com/Rushyanth111/Semester-Stats-Report/tarball/master
 
 # How to Use:
 
-Import the Library in your application.
+Import the Client into your Application.
 
 ```py
-import semester_stats_report as ssr
+from semester_stats_report import SemesterClient
+
+# To Get A Particular Report Mechanism.
+from semester_stats_report import StudentReport
 ```
 
-## Building a Report:
-
-There are some majour Structures that are present within the package, Utilize them with the help of the HTTP Client to Interact with the API in a feesible Manner.
-
-Like so:
+Creating A Report:
 
 ```py
-ssr.DepartmentReport(Code="15CSL66", Name="Something")
+from semester_stats_report import StudentReport
+
+#Creating the report is Simple
+
+new_report = StudentReport.create("1CR14CS001", "Some Name")
 ```
 
-## Using the RestClient:
+The Above can be done for many of the Other reports too, Use the `.create()` method.
 
-The Rest Client is Aware of the various Path that the Main application can take, Do not Attempt to Manually Make that path, it is intricate to build on the path that easily.
+## Using the SemesterClient:
+
+The Rest Client is Aware of the various Path that the Main application can take. As Such, the Path Is Encoded Purely inside the SemesterClient, without requiring any additional Information from the user.
+
+The API Endpoints are reflections of the Actual Endpoints from the api itself. It just requires the Base URL of the API to Communicate with it.
 
 ## Using the Helpers:
 

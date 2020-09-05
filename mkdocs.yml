@@ -1,0 +1,39 @@
+theme:
+  name: material
+  palette:
+    scheme: slate
+    accent: blue
+    primary: red
+
+site_name: Semester-Stats
+repo_url: https://github.com/Rushyanth111/Semester-Stats-Report
+repo_name: Semester-Stats-Report
+site_author: Rushyanth S
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: false
+      custom_templates: templates
+      watch:
+        - semester_stats_report
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+
+nav:
+  - "Semester Client": SemesterClient.md
+  - "Batch Client": BatchClient.md
+  - "Bulk Client": BulkClient.md
+  - "Department Client": DepartmentClient.md
+  - "Student Client": StudentClient.md
+  - "Subject Client": StudentClient.md
+  - "Report API": Reports.md
