@@ -1,3 +1,4 @@
+from semester_stats_report.reports import StudentReport
 from .httpclient import BaseClient
 
 
@@ -8,9 +9,6 @@ class StudentClient(BaseClient):
 
     def get(self):
         return self._get("/{}".format(self.usn))
-
-    def update(self):
-        pass
 
     def get_scores(self):
         return self._get("/{}/scores".format(self.usn))
@@ -23,3 +21,9 @@ class StudentClient(BaseClient):
 
     def get_subject(self, subcode: str):
         return self._get("/{}/subject/{}".format(self.usn, self.subcode))
+
+    def update(self, report: StudentReport):
+        return self._post("/{}".format(self.usn), body=report.dict())
+
+    def put(self, report: StudentReport):
+        return self._post("/", body=report.dict())
