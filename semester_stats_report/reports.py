@@ -1,7 +1,6 @@
 from typing import List
 
 from pydantic import BaseModel, validator
-from requests import status_codes
 from .regex import department_regex, usn_regex, subcode_regex
 
 
