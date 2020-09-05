@@ -1,13 +1,8 @@
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 import requests
-from pydantic import ValidationError, BaseModel
 
 # All of the responses recieved are JSON. Work With them.
-
-
-class HTTPValidationError(BaseModel):
-    detail: List[ValidationError]
 
 
 class NotFoundError(Exception):
