@@ -2,6 +2,8 @@
 
 A Python Module Designed to be of use to any person who wishes to interact with the Semester-Stats API.
 
+Please Check the [Documentation](https://rushyanth111.github.io/Semester-Stats-Report/) on How to use it.
+
 ## Requirements:
 
 - `Python` > `3.7.0`
