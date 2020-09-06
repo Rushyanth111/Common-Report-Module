@@ -18,48 +18,53 @@ class SemesterClient:
         self.url = url
 
     def batch(self, batch: int) -> BatchClient:
-        """Obtain the Client wrt to /Batch/
+        """Obtain the Client wrt to /batch/
 
         Args:
-            batch (int): Integer Batch to Obtain
+            batch (int): Batch to Obtain
 
         Returns:
-            BatchClient: A Client that Handles Batch Operations
+            BatchClient: BatchClient that Handles Batch Requests.
         """
         return BatchClient(self.url, batch)
 
     def dept(self, dept: str) -> DeptClient:
-        """[summary]
+        """Obtain the Client wrt to /dept/
 
         Args:
-            dept (str): [description]
+            dept (str): Department Code.
 
         Returns:
-            DeptClient: [description]
+            DeptClient: DeptClient that Handles Department Requests.
         """
         return DeptClient(self.url, dept)
 
     def student(self, usn: str) -> StudentClient:
-        """[summary]
+        """Obtain the Client wrt to /student/
 
         Args:
-            usn (str): [description]
+            usn (str): Usn for Student to be Searched By.
 
         Returns:
-            StudentClient: [description]
+            StudentClient: StudentClient that Handles Student Requests.
         """
         return StudentClient(self.url, usn)
 
     def subject(self, subcode: str) -> SubjectClient:
-        """[summary]
+        """Obtain the Client wrt to /subject/
 
         Args:
-            subcode (str): [description]
+            subcode (str): Subject Code that needs to be searched for.
 
         Returns:
-            SubjectClient: [description]
+            SubjectClient: SubjectClient that Handles Subject Requests.
         """
         return SubjectClient(self.url, subcode)
 
-    def bulk(self):
+    def bulk(self) -> BulkClient:
+        """Obtain the Client wrt to /bulk/
+
+        Returns:
+            BulkClient: BulkClient that Handles Bulk Requests.
+        """
         return BulkClient(self.url)
