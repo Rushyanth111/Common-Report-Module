@@ -21,6 +21,9 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#report-api">
+          Skip to content
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -149,7 +152,20 @@
       Report API
     </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Usage/" title="Usage">
+      Usage
+    </a>
+</li>
 </ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
 </nav>
 </div>
 </div>
@@ -159,7 +175,24 @@
 <a class="md-content__button md-icon" href="https://github.com/Rushyanth111/Semester-Stats-Report/edit/master/docs/Reports.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
 </a>
-<h1>Report API</h1>
+<h1 id="report-api">Report API<a class="headerlink" href="#report-api" title="Permanent link">¶</a></h1>
+<p>The Report API is the backbone of the Report Structure, there are various reports here.</p>
+<ul>
+<li>SubjectReport</li>
+<li>StudentReport</li>
+<li>DepartmentReport</li>
+<li>ScoreReport</li>
+</ul>
+<p>Each of the Following Members have their own <code>create</code> methods with their own requirements.</p>
+<p>They are Static methods that create an object that you need to store and send to the server when requesting something, most methods use only a string or an integer but some methods (Bulk Methods, Put and POST) require that you send an Object.</p>
+<h1 id="example-of-the-create-method">Example of the <code>create</code> method<a class="headerlink" href="#example-of-the-create-method" title="Permanent link">¶</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="c1">#Create the object and Store it in Obj</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">SubjectReport</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">"17CS68"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Some Random Subject"</span><span class="p">)</span>
+
+<span class="c1"># Add it to some List so that it doens't get lost</span>
+<span class="n">some_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</code></pre></div>
+<p>That's it!</p>
 </article>
 </div>
 </div>
@@ -178,6 +211,19 @@
                 </span>
                 Subject Client
               </div>
+</div>
+</a>
+<a class="md-footer-nav__link md-footer-nav__link--next" href="../Usage/" rel="next" title="Usage">
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Usage
+              </div>
+</div>
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
 </div>
 </a>
 </nav>
