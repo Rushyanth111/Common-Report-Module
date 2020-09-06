@@ -3,13 +3,28 @@ from .httpclient import BaseClient
 
 class BatchClient(BaseClient):
     def __init__(self, url: str, batch: int) -> None:
+        """Batch Client Handles All of the Operations In Respect to a Batch.
+            Do not Initialize this Class Directly, Use the SemesterClient.
+        Args:
+            url (str): Url Of the API
+            batch (int): Integer Batch to Note.
+        """
         super().__init__(url + "/batch")
         self.batch = str(batch)
 
-    def get(self, dept: str):
-        return self._get("/{}".format(self.batch), params={"dept": dept})
+    def get(self, dept: str = None):
+        """Obtain the Batch Students
 
-    def get_scores(self, dept: str, sem: int):
+        Args:
+            dept (str, optional): Department String. Defaults to None.
+
+        Returns:
+            Dict: The Result of the Operation
+        """
+        params = None if dept is None else {"dept": dept}
+        return self._get("/{}".format(self.batch), params=params)
+
+    def get_scores(self, dept: str = None, sem: int = None):
         return self._get(
             "/{}/scores".format(self.batch), params={"dept": dept, "sem": sem}
         )
