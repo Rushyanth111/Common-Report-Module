@@ -30,10 +30,12 @@ markdown_extensions:
       permalink: true
 
 nav:
+  - Home: index.md
   - "Semester Client": SemesterClient.md
   - "Batch Client": BatchClient.md
   - "Bulk Client": BulkClient.md
   - "Department Client": DepartmentClient.md
   - "Student Client": StudentClient.md
-  - "Subject Client": StudentClient.md
+  - "Subject Client": SubjectClient.md
   - "Report API": Reports.md
+  - "Usage": Usage.md
