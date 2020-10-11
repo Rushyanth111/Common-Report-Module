@@ -9,10 +9,14 @@ class DeptClient(BaseClient):
         self.dept = dept
 
     def get(self):
-        return self._get("/{}".format(self.dept))
+        res = self._get("/{}".format(self.dept))
+        rec = DepartmentReport.parse_obj(res)
+        return rec
 
     def update(self, report: DepartmentReport):
-        return self._put("/{}".format(self.dept), body=report.dict())
+        res = self._put("/{}".format(self.dept), body=report.dict())
+        return res
 
     def add(self, report: DepartmentReport):
-        return self._post("/", body=report.dict())
+        res = self._post("/", body=report.dict())
+        return res
