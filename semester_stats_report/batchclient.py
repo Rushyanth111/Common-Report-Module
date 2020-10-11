@@ -1,3 +1,4 @@
+from typing import Tuple
 from .httpclient import BaseClient
 from .reciepts import StudentScoreReciept
 
@@ -14,24 +15,60 @@ class BatchClient(BaseClient):
         self.batch = str(batch)
 
     def get_scores(self, dept: str = None, sem: int = None):
+        """/scores Endpoint
+
+        Args:
+            dept (str, optional): Department Code. Defaults to None.
+            sem (int, optional): Semester. Defaults to None.
+
+        Returns:
+            StudentScoreReciept: Student Report with Scores Embedded.
+        """
         res = self._get(
             "/{}/scores".format(self.batch), params={"dept": dept, "sem": sem}
         )
         rec = StudentScoreReciept.parse_obj(res)
         return rec
 
-    def get_detained(self, dept: str):
-        res = self._get("/{}/detained".format(self.batch), params={"dept": dept})
+    def get_detained(self, dept: str = None, thresh: int = None) -> StudentScoreReciept:
+        """/detained Enpoint
+
+        Args:
+            dept (str): Department Code.
+
+        Returns:
+            StudentScoreReciept: Student Report With Scores Embedded.
+        """
+        res = self._get(
+            "/{}/detained".format(self.batch), params={"dept": dept, "thresh": thresh}
+        )
         rec = StudentScoreReciept.parse_obj(res)
         return rec
 
-    def get_backlogs(self, dept: str, sem: int):
+    def get_backlogs(self, dept: str, sem: int = None) -> StudentScoreReciept:
+        """/backlog Endpoint
+
+        Args:
+            dept (str): Department Code
+            sem (int, optional): Semester,
+
+        Returns:
+            StudentScoreReciept: Student Report With Scores Embedded.
+        """
         res = self._get(
             "/{}/backlogs".format(self.batch), params={"dept": dept, "sem": sem}
         )
         rec = StudentScoreReciept.parse_obj(res)
         return rec
 
-    def get_aggregate(self, dept: str):
+    def get_aggregate(self, dept: str = None) -> Tuple[str, int]:
+        """/aggregate Endpoint
+
+        Args:
+            dept (str, optional): Department Code. Defaults to None.
+
+        Returns:
+            Tuple[str, int]: Student Aggregate With [USN, int]
+        """
         res = self._get("/{}/aggregate".format(self.batch), params={"dept": dept})
         return res
