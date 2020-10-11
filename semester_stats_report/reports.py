@@ -75,8 +75,17 @@ class SubjectReport(BaseModel):
     _subcode_check = validator("Code", allow_reuse=True)(subcode_validate)
 
     @staticmethod
-    def create(code: str, name: str):
-        return SubjectReport(Code=code, Name=name)
+    def create(
+        code: str, name: str, minext: int, mintot: int, maxtotal: int, credits: int
+    ):
+        return SubjectReport(
+            Code=code,
+            Name=name,
+            MinExt=minext,
+            MinTotal=mintot,
+            MaxTotal=maxtotal,
+            Credits=credits,
+        )
 
 
 class ScoreReport(BaseModel):
