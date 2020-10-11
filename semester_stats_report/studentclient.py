@@ -14,9 +14,6 @@ class StudentClient(BaseClient):
     def get_scores(self):
         return self._get("/{}/scores".format(self.usn))
 
-    def get_semester(self, sem: int):
-        return self._get("/{}/semester".format(self.usn), params={"sem": sem})
-
     def get_backlogs(self, sem: int):
         return self._get("/{}/backlogs".format(self.usn), params={"sem": sem})
 
