@@ -1,4 +1,5 @@
 from .httpclient import BaseClient
+from .reciepts import StudentScoreReciept
 
 
 class BatchClient(BaseClient):
@@ -13,20 +14,24 @@ class BatchClient(BaseClient):
         self.batch = str(batch)
 
     def get_scores(self, dept: str = None, sem: int = None):
-        return self._get(
+        res = self._get(
             "/{}/scores".format(self.batch), params={"dept": dept, "sem": sem}
         )
-
-    def get_scheme(self):
-        return self._get("/{}/scheme".format(self.batch))
+        rec = StudentScoreReciept.parse_obj(res)
+        return rec
 
     def get_detained(self, dept: str):
-        return self._get("/{}/detained".format(self.batch), params={"dept": dept})
+        res = self._get("/{}/detained".format(self.batch), params={"dept": dept})
+        rec = StudentScoreReciept.parse_obj(res)
+        return rec
 
     def get_backlogs(self, dept: str, sem: int):
-        return self._get(
+        res = self._get(
             "/{}/backlogs".format(self.batch), params={"dept": dept, "sem": sem}
         )
+        rec = StudentScoreReciept.parse_obj(res)
+        return rec
 
     def get_aggregate(self, dept: str):
-        return self._get("/{}/aggregate".format(self.batch), params={"dept": dept})
+        res = self._get("/{}/aggregate".format(self.batch), params={"dept": dept})
+        return res
