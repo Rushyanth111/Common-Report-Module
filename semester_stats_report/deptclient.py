@@ -1,3 +1,4 @@
+from semester_stats_report.reciepts import DepartmentReciept
 from semester_stats_report.reports import DepartmentReport
 
 from .httpclient import BaseClient
@@ -21,7 +22,7 @@ class DeptClient(BaseClient):
             DepartmentReport: Deparment Report with Details.
         """
         res = self._get("/{}".format(self.dept))
-        rec = DepartmentReport.parse_obj(res)
+        rec = DepartmentReciept.parse_obj(res)
         return rec
 
     def update(self, report: DepartmentReport):
