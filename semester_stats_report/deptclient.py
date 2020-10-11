@@ -1,4 +1,5 @@
 from semester_stats_report.reports import DepartmentReport
+
 from .httpclient import BaseClient
 
 

@@ -1,7 +1,6 @@
-from typing import List
-
 from pydantic import BaseModel, validator
-from .regex import department_regex, usn_regex, subcode_regex
+
+from .regex import department_regex, subcode_regex, usn_regex
 
 
 def dept_validate(dept: str):
@@ -62,6 +61,10 @@ class StudentReport(BaseModel):
 class SubjectReport(BaseModel):
     Code: str
     Name: str
+    MinExt: int
+    MinTotal: int
+    MaxTotal: int
+    Credits: int
 
     def __hash__(self) -> int:
         return hash(self.Code)
@@ -109,30 +112,3 @@ class ScoreReport(BaseModel):
         return ScoreReport(
             Usn=usn, SubjectCode=subcode, Internals=internals, Externals=externals
         )
-
-
-class SubjectScoreList(BaseModel):
-    Code: str
-    Name: str
-    Internal: int
-    External: int
-
-    def __hash__(self) -> int:
-        return hash((self.Code, self.Name, self.Internal, self.External))
-
-    def __eq__(self, o: object) -> bool:
-        return (
-            self.Code == o.Code
-            and self.Internal == o.Internal
-            and self.External == o.External
-        )
-
-    _subcode_check = validator("Code", pre=True, allow_reuse=True)(subcode_validate)
-
-
-class MergedReport(BaseModel):
-    Usn: str
-    Name: str
-    Scores: List[SubjectScoreList]
-
-    _usn_check = validator("Usn", pre=True, allow_reuse=True)(usn_validate)

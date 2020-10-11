@@ -1,16 +1,27 @@
 from typing import Any, Dict
 
 import requests
+from pydantic import ValidationError
 
 # All of the responses recieved are JSON. Work With them.
 
 
 class NotFoundError(Exception):
-    pass
+    def __init__(self, message: str) -> None:
+        self.message = message
+        super().__init__(message)
 
 
-class UnProccessableEntity(Exception):
-    pass
+class ConflictError(Exception):
+    def __init__(self, message: str) -> None:
+        self.message = message
+        super().__init__(message)
+
+
+class UnProccessableEntity(ValidationError):
+    def __init__(self, message: str) -> None:
+        self.message = message
+        super().__init__(message)
 
 
 class BaseClient:
@@ -26,7 +37,7 @@ class BaseClient:
         if res.status_code == 404:
             raise NotFoundError(data["detail"])
         if res.status_code == 422:
-            raise UnProccessableEntity
+            raise UnProccessableEntity(data["detail"])
 
         return data
 
@@ -38,7 +49,9 @@ class BaseClient:
         if res.status_code == 404:
             raise NotFoundError(data["detail"])
         if res.status_code == 422:
-            raise UnProccessableEntity
+            raise UnProccessableEntity(data["detail"])
+        if res.status_code == 409:
+            raise ConflictError(data["detail"])
 
         return data
 
@@ -50,6 +63,6 @@ class BaseClient:
         if res.status_code == 404:
             raise NotFoundError(data["detail"])
         if res.status_code == 422:
-            raise UnProccessableEntity
+            raise UnProccessableEntity(data["detail"])
 
         return data

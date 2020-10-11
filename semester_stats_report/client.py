@@ -1,8 +1,8 @@
 from .batchclient import BatchClient
+from .bulkclient import BulkClient
 from .deptclient import DeptClient
 from .studentclient import StudentClient
 from .subjectclient import SubjectClient
-from .bulkclient import BulkClient
 
 
 class SemesterClient:

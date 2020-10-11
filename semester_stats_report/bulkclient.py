@@ -1,11 +1,13 @@
+from typing import List
+
 from semester_stats_report.reports import (
     DepartmentReport,
     ScoreReport,
     StudentReport,
     SubjectReport,
 )
+
 from .httpclient import BaseClient
-from typing import List
 
 
 class BulkClient(BaseClient):

@@ -1,18 +1,10 @@
-from .reports import (
-    DepartmentReport,
-    StudentReport,
-    SubjectReport,
-    MergedReport,
-    ScoreReport,
-)
-
 from .client import SemesterClient
+from .reports import DepartmentReport, ScoreReport, StudentReport, SubjectReport
 
 __all__ = [
     "DepartmentReport",
     "StudentReport",
     "SubjectReport",
-    "MergedReport",
     "ScoreReport",
     "SemesterClient",
 ]
