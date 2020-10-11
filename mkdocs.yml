@@ -31,11 +31,12 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - "Semester Client": SemesterClient.md
-  - "Batch Client": BatchClient.md
-  - "Bulk Client": BulkClient.md
-  - "Department Client": DepartmentClient.md
-  - "Student Client": StudentClient.md
-  - "Subject Client": SubjectClient.md
-  - "Report API": Reports.md
   - "Usage": Usage.md
+  - "Report API": Reports.md
+  - Clients:
+    - "Semester Client": "Clients/SemesterClient.md"
+    - "Batch Client": "Clients/BatchClient.md"
+    - "Bulk Client": "Clients/BulkClient.md"
+    - "Department Client": "Clients/DepartmentClient.md"
+    - "Student Client": "Clients/StudentClient.md"
+    - "Subject Client": "Clients/SubjectClient.md"
