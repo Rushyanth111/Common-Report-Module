@@ -19,34 +19,34 @@ class BulkClient(BaseClient):
         """
         super().__init__(url + "/bulk")
 
-    def scores(self, reports: List[ScoreReport]):
+    async def scores(self, reports: List[ScoreReport]):
         """/scores Endpoint
 
         Args:
             reports (List[ScoreReport]): List of Student Reports
         """
-        return self._post("/score", body=[x.dict() for x in reports])
+        return await self._post("/score", body=[x.dict() for x in reports])
 
-    def dept(self, reports: List[DepartmentReport]):
+    async def dept(self, reports: List[DepartmentReport]):
         """/dept Endpoint
 
         Args:
             reports (List[DepartmentReport]): List of Department Reports
         """
-        return self._post("/dept", body=[x.dict() for x in reports])
+        return await self._post("/dept", body=[x.dict() for x in reports])
 
-    def subject(self, reports: List[SubjectReport]):
+    async def subject(self, reports: List[SubjectReport]):
         """/subject Endpoint
 
         Args:
             reports (List[SubjectReport]): List of Subject Reports
         """
-        return self._post("/subject", body=[x.dict() for x in reports])
+        return await self._post("/subject", body=[x.dict() for x in reports])
 
-    def student(self, reports: List[StudentReport]):
+    async def student(self, reports: List[StudentReport]):
         """/student Endpoint
 
         Args:
             reports (List[StudentReport]): List of Student Reports.
         """
-        return self._post("/student", body=[x.dict() for x in reports])
+        return await self._post("/student", body=[x.dict() for x in reports])

@@ -14,7 +14,7 @@ class BatchClient(BaseClient):
         super().__init__(url + "/batch")
         self.batch = str(batch)
 
-    def get_scores(self, dept: str = None, sem: int = None):
+    async def get_scores(self, dept: str = None, sem: int = None):
         """/scores Endpoint
 
         Args:
@@ -24,13 +24,15 @@ class BatchClient(BaseClient):
         Returns:
             StudentScoreReciept: Student Report with Scores Embedded.
         """
-        res = self._get(
+        res = await self._get(
             "/{}/scores".format(self.batch), params={"dept": dept, "sem": sem}
         )
         rec = StudentScoreReciept.parse_obj(res)
         return rec
 
-    def get_detained(self, dept: str = None, thresh: int = None) -> StudentScoreReciept:
+    async def get_detained(
+        self, dept: str = None, thresh: int = None
+    ) -> StudentScoreReciept:
         """/detained Enpoint
 
         Args:
@@ -39,13 +41,13 @@ class BatchClient(BaseClient):
         Returns:
             StudentScoreReciept: Student Report With Scores Embedded.
         """
-        res = self._get(
+        res = await self._get(
             "/{}/detained".format(self.batch), params={"dept": dept, "thresh": thresh}
         )
         rec = StudentScoreReciept.parse_obj(res)
         return rec
 
-    def get_backlogs(self, dept: str, sem: int = None) -> StudentScoreReciept:
+    async def get_backlogs(self, dept: str, sem: int = None) -> StudentScoreReciept:
         """/backlog Endpoint
 
         Args:
@@ -55,13 +57,13 @@ class BatchClient(BaseClient):
         Returns:
             StudentScoreReciept: Student Report With Scores Embedded.
         """
-        res = self._get(
+        res = await self._get(
             "/{}/backlogs".format(self.batch), params={"dept": dept, "sem": sem}
         )
         rec = StudentScoreReciept.parse_obj(res)
         return rec
 
-    def get_aggregate(self, dept: str = None) -> Tuple[str, int]:
+    async def get_aggregate(self, dept: str = None) -> Tuple[str, int]:
         """/aggregate Endpoint
 
         Args:
@@ -70,5 +72,5 @@ class BatchClient(BaseClient):
         Returns:
             Tuple[str, int]: Student Aggregate With [USN, int]
         """
-        res = self._get("/{}/aggregate".format(self.batch), params={"dept": dept})
+        res = await self._get("/{}/aggregate".format(self.batch), params={"dept": dept})
         return res

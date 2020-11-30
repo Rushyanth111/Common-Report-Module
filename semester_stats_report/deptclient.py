@@ -15,30 +15,30 @@ class DeptClient(BaseClient):
         super().__init__(url + "/dept")
         self.dept = dept
 
-    def get(self) -> DepartmentReport:
+    async def get(self) -> DepartmentReport:
         """Get the Department
 
         Returns:
             DepartmentReport: Deparment Report with Details.
         """
-        res = self._get("/{}".format(self.dept))
+        res = await self._get("/{}".format(self.dept))
         rec = DepartmentReciept.parse_obj(res)
         return rec
 
-    def update(self, report: DepartmentReport):
+    async def update(self, report: DepartmentReport):
         """Update a Department
 
         Args:
             report (DepartmentReport): Department Report
         """
-        res = self._put("/{}".format(self.dept), body=report.dict())
+        res = await self._put("/{}".format(self.dept), body=report.dict())
         return res
 
-    def add(self, report: DepartmentReport):
+    async def add(self, report: DepartmentReport):
         """Send a Department
 
         Args:
             report (DepartmentReport): Department Report
         """
-        res = self._post("/", body=report.dict())
+        res = await self._post("/", body=report.dict())
         return res
