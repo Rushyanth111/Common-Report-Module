@@ -3,10 +3,10 @@ from semester_stats_report import SemesterClient
 import csv
 from typing import Set
 import glob
-
+import asyncio
 
 # This is the Main Client, Use it to POST data.
-cl = SemesterClient("https://semdata.rxav.pw")
+cl = SemesterClient("http://localhost:9000")
 
 
 # We are keeping Sets to Avoid Duplication.
@@ -64,19 +64,25 @@ for filename in glob.glob("*.csv"):
 # IGNORING THE ABOVE WILL CAUSE MISSING DATA.
 # YOU ARE WARNED.
 
-# Send the StudentReports First
-cl.bulk().student(list(stu_keep))
 
-# Send Subject Reports Second.
-cl.bulk().subject(list(sub_keep))
+async def main():
+    # Send the StudentReports First
+    await cl.bulk().student(list(stu_keep))
 
-# Send the Score Reports AT THE LAST:
-cl.bulk().scores(list(sco_keep))
+    # Send Subject Reports Second.
+    await cl.bulk().subject(list(sub_keep))
 
-# Yay, Data is Sent and Assimilated.
-# Lets Fetch Some Data.
+    # Send the Score Reports AT THE LAST:
+    await cl.bulk().scores(list(sco_keep))
 
-stu = cl.student("1CR17CS001").get()
-print(stu)
+    # Yay, Data is Sent and Assimilated.
+    # Lets Fetch Some Data.
 
+    stu = await cl.student("1CR17CS001").get()
+    print(stu)
+
+
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+result = loop.run_until_complete(main())
 # Program should run as-is, provided all of the depts are up to date.
