@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "semester-stats-report"
-version = "1.0.1"
+version = "2.0.0"
 description = "Helper Module for the Semester-Stats"
 authors = ["Rushyanth S <42034084+Rushyanth111@users.noreply.github.com>"]
 packages = [
@@ -10,7 +10,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.7"
 pydantic = "^1.6.1"
-requests = "^2.24.0"
+httpx = "^0.16.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.1"

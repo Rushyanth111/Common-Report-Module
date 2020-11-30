@@ -8,6 +8,6 @@ setup(
     python_requires=">=3.7.0",
     url="https://github.com/Rushyanth111/Common-Report-Module",
     packages=find_packages(exclude=[".venv", "tests"]),
-    install_requires=["pydantic", "requests"],
-    version="0.1.0",
+    install_requires=["pydantic", "httpx"],
+    version="2.0.0",
 )
