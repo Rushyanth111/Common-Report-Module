@@ -5,22 +5,22 @@ from .regex import department_regex, subcode_regex, usn_regex
 
 def dept_validate(dept: str):
     dept = dept.upper()
-    if department_regex.match(dept) is None:
-        raise ValueError("Not a Department Code.")
+    if department_regex.fullmatch(dept) is None:
+        raise ValueError("Not a Department Code: {}".format(dept))
     return dept
 
 
 def usn_validate(usn: str):
     usn = usn.upper()
-    if usn_regex.match(usn) is None:
-        raise ValueError("Not a Valid Usn")
+    if usn_regex.fullmatch(usn) is None:
+        raise ValueError("Not a Valid Usn: {}".format(usn))
     return usn
 
 
 def subcode_validate(subcode: str):
     subcode = subcode.upper()
-    if subcode_regex.match(subcode) is None:
-        raise ValueError("Not a valid Subject Code")
+    if subcode_regex.fullmatch(subcode) is None:
+        raise ValueError("Not a valid Subject Code: {}".format(subcode))
     return subcode
 
 
